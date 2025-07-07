@@ -3,6 +3,7 @@ import 'package:e_store_app/common/widgets/custom_shapes/containers/circular_con
 import 'package:e_store_app/common/widgets/icons/circular_icon.dart';
 import 'package:e_store_app/common/widgets/image/image_round.dart';
 import 'package:e_store_app/common/widgets/products/cart/product_price_text.dart';
+import 'package:e_store_app/common/widgets/texts/brandtitle_verifyicon.dart';
 import 'package:e_store_app/common/widgets/texts/product_title.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
 import 'package:e_store_app/utils/contants/image_strings.dart';
@@ -77,17 +78,7 @@ class ProductCardVert extends StatelessWidget {
                 child: Column(children: [
                   ProductTitle(title: 'Blue By-Cycle', smallSize: true),
                   SizedBox(height: SizesLW.spaceBtwItems / 2),
-                  Row(
-                    children: [
-                      Text("Soraab",
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: Theme.of(context).textTheme.labelMedium),
-                      SizedBox(width: SizesLW.xs),
-                      Icon(Iconsax.verify5,
-                          color: EStoreColors.primary, size: SizesLW.iconXs),
-                    ],
-                  ),
+                  BrandtitleVerifyicon(title: "Sorab"),
                   SizedBox(height: SizesLW.spacesBtwSections - 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

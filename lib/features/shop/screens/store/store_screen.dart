@@ -1,7 +1,10 @@
-import 'package:e_store_app/common/widgets/custom_shapes/containers/circular_container.dart';
+import 'package:e_store_app/common/widgets/appbar/custom_tabbar.dart';
 import 'package:e_store_app/common/widgets/custom_shapes/containers/custom_search.dart';
+import 'package:e_store_app/common/widgets/layouts/grid_layout_custom.dart';
 import 'package:e_store_app/common/widgets/products/cart/custom_cart_counter.dart';
+import 'package:e_store_app/common/widgets/products/product_and_brands/brand_card.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
+import 'package:e_store_app/features/shop/screens/store/widgets/categories_tabs.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:e_store_app/utils/helpers/e_helper_func.dart';
@@ -12,19 +15,22 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Store", style: Theme.of(context).textTheme.headlineMedium),
-        actions: [
-          CartCounterIcon(
-            onPressed: () {},
-          )
-        ],
-      ),
-      body: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        appBar: AppBar(
+          title:
+              Text("Store", style: Theme.of(context).textTheme.headlineMedium),
+          actions: [
+            CartCounterIcon(
+              onPressed: () {},
+            )
+          ],
+        ),
+        body: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
                   automaticallyImplyLeading: false,
                   pinned: true,
                   floating: true,
@@ -52,13 +58,34 @@ class StoreScreen extends StatelessWidget {
                         /// --- Featured Brands
                         SectionHeading(title: "Featured Brands"),
                         SizedBox(height: SizesLW.spaceBtwItems / 2),
-                        CircularContainer()
+                        GridLayoutCustom(
+                          itemCount: 4,
+                          mainAxisExtent: 80,
+                          itemBuilder: (context, index) {
+                            return CustomBrandCard(showBoarder: true);
+                          },
+                        )
                       ],
                     ),
-                  )),
-            ];
-          },
-          body: Padding(padding: EdgeInsets.all(0))),
+                  ),
+                  bottom: CustomTabBar(tabs: [
+                    Tab(child: Text("Sports")),
+                    Tab(child: Text("Furniture")),
+                    Tab(child: Text("Electronics")),
+                    Tab(child: Text("Clothes")),
+                    Tab(child: Text("Cosmetics")),
+                  ]),
+                ),
+              ];
+            },
+            body: TabBarView(children: [
+              CategoriesTabs(),
+              CategoriesTabs(),
+              CategoriesTabs(),
+              CategoriesTabs(),
+              CategoriesTabs(),
+            ])),
+      ),
     );
   }
 }
