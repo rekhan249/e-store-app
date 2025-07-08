@@ -1,3 +1,4 @@
+import 'package:e_store_app/features/persionalization/screens/settings/setting_screen.dart';
 import 'package:e_store_app/features/shop/screens/home/home_screen.dart';
 import 'package:e_store_app/features/shop/screens/store/store_screen.dart';
 import 'package:e_store_app/features/shop/screens/wishlist/wishlist_screen.dart';
@@ -46,6 +47,6 @@ class NavigationBarController extends GetxController {
     HomeScreen(),
     StoreScreen(),
     WishlistScreen(),
-    Container(),
+    SettingScreen(),
   ];
 }
