@@ -98,4 +98,7 @@ class ImageStrings {
   static const String prodImage42 =
       "assets/images/products/washing-machine.png";
   static const String prodImage43 = "assets/images/products/white-sneakers.png";
+
+  /// user image
+  static const String rek = "assets/images/users/rek.jpeg";
 }

@@ -19,18 +19,29 @@ class SettingScreen extends StatelessWidget {
                 child: Column(
               children: [
                 CustomAppbar(
-                  title: Text("Account Settings",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .apply(color: EStoreColors.white)),
-                ),
+                    title: Text("Account",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium!
+                            .apply(color: EStoreColors.white))),
                 SizedBox(height: SizesLW.spacesBtwSections),
 
                 /// User Profile card
                 ListTile(
-                  leading: CircularImage(image: ImageStrings.prodImage3),
-                )
+                  leading: CircularImage(
+                      image: ImageStrings.rek, width: 50, height: 50),
+                  title: Text("Coding With RE.K",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .apply(color: EStoreColors.white)),
+                  subtitle: Text("rekhan2490@gmail.com",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .apply(color: EStoreColors.white)),
+                ),
+                SizedBox(height: SizesLW.spacesBtwSections),
               ],
             ))
           ],
