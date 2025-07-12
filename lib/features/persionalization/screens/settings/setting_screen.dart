@@ -30,7 +30,7 @@ class SettingScreen extends StatelessWidget {
                 ListTile(
                   leading: CircularImage(
                       image: ImageStrings.rek, width: 50, height: 50),
-                  title: Text("Coding With RE.K",
+                  title: Text("Codeing with RE.KHAN",
                       style: Theme.of(context)
                           .textTheme
                           .headlineSmall!
