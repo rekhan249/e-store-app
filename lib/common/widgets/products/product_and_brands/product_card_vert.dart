@@ -5,11 +5,13 @@ import 'package:e_store_app/common/widgets/image/image_round.dart';
 import 'package:e_store_app/common/widgets/products/cart/product_price_text.dart';
 import 'package:e_store_app/common/widgets/texts/brandtitle_verifyicon.dart';
 import 'package:e_store_app/common/widgets/texts/product_title.dart';
+import 'package:e_store_app/features/shop/screens/product_details/product_details.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
 import 'package:e_store_app/utils/contants/image_strings.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:e_store_app/utils/helpers/e_helper_func.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductCardVert extends StatelessWidget {
@@ -19,7 +21,7 @@ class ProductCardVert extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = EHelperFunc.isDarkMode(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => ProductDetails()),
       child: Container(
         width: 180,
         padding: EdgeInsets.all(1),
