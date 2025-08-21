@@ -54,6 +54,14 @@ class ImageStrings {
   static const String proReview3 = "assets/images/reviews/rekhanz.png";
 
   /// --- payment method
+  static const String paypal = "assets/icons/payment/paypal.png";
+  static const String googlepay = "assets/icons/payment/googlepay.png";
+  static const String applepay = "assets/icons/payment/applepay.png";
+  static const String paystack = "assets/icons/payment/paystack.png";
+  static const String mastercard = "assets/icons/payment/mastercard.png";
+  static const String creditcard = "assets/icons/payment/creditcard.png";
+  static const String paytm = "assets/icons/payment/paytm.png";
+  static const String visa = "assets/icons/payment/visa.png";
 
   /// --- Product Images
   static const String prodImage1 = "assets/images/products/by-cycle.png";
