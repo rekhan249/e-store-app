@@ -53,6 +53,8 @@ class ImageStrings {
   static const String proReview2 = "assets/images/reviews/rekhan.png";
   static const String proReview3 = "assets/images/reviews/rekhanz.png";
 
+  /// --- payment method
+
   /// --- Product Images
   static const String prodImage1 = "assets/images/products/by-cycle.png";
   static const String prodImage2 = "assets/images/products/camera.png";
