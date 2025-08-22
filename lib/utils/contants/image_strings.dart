@@ -62,6 +62,8 @@ class ImageStrings {
   static const String creditcard = "assets/icons/payment/creditcard.png";
   static const String paytm = "assets/icons/payment/paytm.png";
   static const String visa = "assets/icons/payment/visa.png";
+  static const String successfullpayment =
+      "assets/icons/payment/successfullpayment.png";
 
   /// --- Product Images
   static const String prodImage1 = "assets/images/products/by-cycle.png";

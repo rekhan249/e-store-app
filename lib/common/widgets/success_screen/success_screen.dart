@@ -1,6 +1,7 @@
 import 'package:e_store_app/common/styles/spacing_style.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:e_store_app/utils/contants/text_strings.dart';
+import 'package:e_store_app/utils/helpers/e_helper_func.dart';
 import 'package:flutter/material.dart';
 
 class SuccessScreen extends StatelessWidget {
@@ -21,10 +22,13 @@ class SuccessScreen extends StatelessWidget {
           padding: SpacingStyle.paddingWithAppBarHeight * 2,
           child: Column(
             children: [
-              /// Image
+              /// image
+              Image(
+                  image: AssetImage(image),
+                  width: EHelperFunc.screenWidth() * 0.6),
               SizedBox(height: SizesLW.spacesBtwSections),
 
-              /// Title and Subtilte
+              /// Title & SubTitle
               Text(title,
                   style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center),

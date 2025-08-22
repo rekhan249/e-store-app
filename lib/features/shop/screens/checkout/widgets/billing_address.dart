@@ -1,8 +1,6 @@
-import 'package:e_store_app/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
-import 'package:e_store_app/utils/helpers/e_helper_func.dart';
 import 'package:flutter/material.dart';
 
 class BillingAddress extends StatelessWidget {
@@ -10,22 +8,31 @@ class BillingAddress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = EHelperFunc.isDarkMode(context);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionHeading(
-            title: "Payment Method", buttonTitle: "Change", onPressed: () {}),
-        SizedBox(height: SizesLW.spaceBtwItems / 2),
+            title: "Shipping Address", buttonTitle: "Change", onPressed: () {}),
+        Text("Coding With REk", style: Theme.of(context).textTheme.bodyLarge),
         Row(
           children: [
-            CircularContainer(
-              width: 60,
-              height: 35,
-              backgroundColor: isDark ? EStoreColors.dark : EStoreColors.white,
-              padding: EdgeInsets.all(SizesLW.sm),
+            Icon(Icons.phone, color: EStoreColors.grey, size: 16),
+            SizedBox(width: SizesLW.spaceBtwItems),
+            Text("+92-346-1234567",
+                style: Theme.of(context).textTheme.bodyLarge),
+          ],
+        ),
+        SizedBox(width: SizesLW.spaceBtwItems / 2),
+        Row(
+          children: [
+            Icon(Icons.location_history, color: EStoreColors.grey, size: 16),
+            SizedBox(width: SizesLW.spaceBtwItems),
+            Expanded(
+              child: Text("House no.00,street no.00,sector # 00,Rawalpindi",
+                  style: Theme.of(context).textTheme.bodyLarge, softWrap: true),
             ),
           ],
-        )
+        ),
       ],
     );
   }

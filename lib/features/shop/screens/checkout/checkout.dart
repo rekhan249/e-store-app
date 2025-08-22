@@ -1,13 +1,18 @@
 import 'package:e_store_app/common/widgets/Appbar/custom_appbar.dart';
 import 'package:e_store_app/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:e_store_app/common/widgets/products/cart/custom_coupon.dart';
+import 'package:e_store_app/common/widgets/success_screen/success_screen.dart';
 import 'package:e_store_app/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:e_store_app/features/shop/screens/checkout/widgets/billing_address.dart';
-import 'package:e_store_app/features/shop/screens/checkout/widgets/billing_payment.dart';
+import 'package:e_store_app/features/shop/screens/checkout/widgets/billing_amount_section.dart';
+import 'package:e_store_app/features/shop/screens/checkout/widgets/billing_payment_section.dart';
+import 'package:e_store_app/navigate_menu.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
+import 'package:e_store_app/utils/contants/image_strings.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:e_store_app/utils/helpers/e_helper_func.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({super.key});
@@ -36,7 +41,7 @@ class CheckoutScreen extends StatelessWidget {
               child: Column(
                 children: [
                   /// Pricing
-                  BillingPayment(),
+                  BillingAmountSection(),
                   SizedBox(height: SizesLW.spaceBtwItems),
 
                   /// Divider
@@ -45,15 +50,28 @@ class CheckoutScreen extends StatelessWidget {
 
                   /// Payment Method
                   SizedBox(height: SizesLW.spaceBtwItems),
-                  BillingAddress()
+                  BillingPaymentSection(),
 
                   /// Address
+                  SizedBox(height: SizesLW.spaceBtwItems),
+                  BillingAddress()
                 ],
               ),
             )
           ],
         ),
       )),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(SizesLW.defaultSpaces),
+        child: ElevatedButton(
+            onPressed: () => Get.to(() => SuccessScreen(
+                  image: ImageStrings.successfullpayment,
+                  title: 'payment Success!',
+                  subTitle: 'Yours items will be shipped soon',
+                  onPressed: () => Get.offAll(() => NavigateMenu()),
+                )),
+            child: Text("CheckOut \$256.0")),
+      ),
     );
   }
 }
