@@ -1,5 +1,7 @@
 import 'package:e_store_app/common/widgets/text_image/vertical_text_image.dart';
+import 'package:e_store_app/features/shop/screens/sub_category/sub_category_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomHomeCategories extends StatelessWidget {
   const CustomHomeCategories({super.key, required this.dark});
@@ -16,7 +18,10 @@ class CustomHomeCategories extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (conustomtext, index) {
             return CustomVerticalTextImage(
-                image: '', title: "Shoes Category", onTap: () {}, dark: dark);
+                image: '',
+                title: "Shoes Category",
+                onTap: () => Get.to(() => SubCategoryScreen()),
+                dark: dark);
           },
         ));
   }

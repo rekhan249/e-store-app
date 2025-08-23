@@ -5,6 +5,7 @@ import 'package:e_store_app/common/widgets/list_tiles/custom_user_pro.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
 import 'package:e_store_app/features/persionalization/screens/address/addresses.dart';
 import 'package:e_store_app/features/persionalization/screens/profile/profile_screen.dart';
+import 'package:e_store_app/features/shop/screens/orders/order_screen.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
 import 'package:e_store_app/utils/contants/image_strings.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
@@ -61,7 +62,8 @@ class SettingScreen extends StatelessWidget {
                 CustomMenuTile(
                     title: "My Orders",
                     subTitle: "In-progress and complete orders",
-                    iconData: Iconsax.bag_tick),
+                    iconData: Iconsax.bag_tick,
+                    onTap: () => Get.to(() => OrderScreen())),
                 CustomMenuTile(
                     title: "Bank Account",
                     subTitle: "Withdraw balance to registerd bank account",
