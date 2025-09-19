@@ -51,6 +51,8 @@ class AuthenticRepository extends GetxController {
       throw FormatException();
     } on PlatformException catch (e) {
       throw PlatformException(code: e.code).message!;
+    } catch (e) {
+      throw "Something went wrong, Please try again";
     }
   }
 }
