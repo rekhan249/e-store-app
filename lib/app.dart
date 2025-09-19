@@ -1,4 +1,5 @@
-import 'package:e_store_app/features/authentication/screens/onboarding.dart';
+import 'package:e_store_app/bindings/general_bindings.dart';
+import 'package:e_store_app/utils/contants/colors.dart';
 import 'package:e_store_app/utils/theme/customiz_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,12 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: CustomizTheme.lightTheme,
       darkTheme: CustomizTheme.darkTheme,
-      home: OnboardingScreen(),
+      initialBinding: GeneralBindings(),
+      home: Scaffold(
+        backgroundColor: EStoreColors.primary,
+        body:
+            Center(child: CircularProgressIndicator(color: EStoreColors.white)),
+      ),
     );
   }
 }

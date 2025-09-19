@@ -1,6 +1,8 @@
 import 'package:e_store_app/features/authentication/screens/login/login_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class OnboardingController extends GetxController {
   static OnboardingController get instance => Get.find();
@@ -23,6 +25,14 @@ class OnboardingController extends GetxController {
   // update current index and jump to next
   void nextPage() {
     if (currentIndex.value == 2) {
+      final getStore = GetStorage();
+      if (kDebugMode) {
+        print(getStore.read("isFirstTime"));
+      }
+      getStore.write("isFirstTime", false);
+      if (kDebugMode) {
+        print(getStore.read("isFirstTime"));
+      }
       Get.offAll(() => LoginScreen());
     } else {
       int page = currentIndex.value + 1;

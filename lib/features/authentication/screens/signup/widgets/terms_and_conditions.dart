@@ -1,7 +1,9 @@
+import 'package:e_store_app/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:e_store_app/utils/contants/text_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({super.key, required this.dark});
@@ -10,13 +12,17 @@ class TermsAndConditions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final signupControl = SignupController.instance;
     return Row(
       children: [
         SizedBox(
-            width: 24,
-            height: 24,
-            child: Checkbox(value: true, onChanged: (value) {})),
-        SizedBox(width: SizesLW.spaceBtwItems),
+            width: 20,
+            height: 20,
+            child: Obx(() => Checkbox(
+                value: signupControl.privacyPolicy.value,
+                onChanged: (value) => signupControl.privacyPolicy.value =
+                    !signupControl.privacyPolicy.value))),
+        SizedBox(width: SizesLW.spaceBtwItems / 2),
         Expanded(
           child: Text.rich(TextSpan(children: [
             TextSpan(
