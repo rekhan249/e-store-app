@@ -14,13 +14,16 @@ class FullScreenLoader {
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              color: EHelperFunc.isDarkMode(context)
-                  ? EStoreColors.dark
-                  : EStoreColors.white,
+              decoration: BoxDecoration(
+                color: EHelperFunc.isDarkMode(context)
+                    ? EStoreColors.dark
+                    : EStoreColors.white,
+              ),
               child: Column(
                 children: [
-                  SizedBox(height: 250),
-                  AnimationLoader(text: text, animation: animation)
+                  Expanded(child: SizedBox(height: 200)),
+                  Expanded(
+                      child: AnimationLoader(text: text, animation: animation))
                 ],
               ),
             )));

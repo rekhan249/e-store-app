@@ -32,10 +32,16 @@ class SignupController extends GetxController {
 
       /// check internet connectivity
       final isConnected = await NetworkManage.instance.isConnected();
-      if (!isConnected) return;
+      if (!isConnected) {
+        FullScreenLoader.stopLoading();
+        return;
+      }
 
       /// form validation
-      if (!signUpFormKey.currentState!.validate()) return;
+      if (!signUpFormKey.currentState!.validate()) {
+        FullScreenLoader.stopLoading();
+        return;
+      }
 
       /// privacy policy
       if (!privacyPolicy.value) {
@@ -64,11 +70,10 @@ class SignupController extends GetxController {
       userRepo.saveUserRecord(newUser);
 
       /// show successfull message
-      LoggerHelper.successSnakebar(
-          title: "Congrate", message: "Yours account had been created");
+      LoggerHelper.successSnakebar(title: "Congrate");
 
       /// Move to for email verification
-      Get.to(() => VerifyEmailScreen());
+      Get.to(() => VerifyEmailScreen(email: email.text.trim()));
     } catch (e) {
       /// catch and show the generic error to users
       LoggerHelper.errorSnakebar(title: "Oh Snap!", message: e.toString());

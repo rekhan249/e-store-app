@@ -1,6 +1,6 @@
 import 'package:e_store_app/common/widget_signinup/form_divider.dart';
 import 'package:e_store_app/common/widget_signinup/social_btn.dart';
-import 'package:e_store_app/features/authentication/controllers/signup/signup_controller.dart';
+import 'package:e_store_app/features/authentication/controllers/signup_controller/signup_controller.dart';
 import 'package:e_store_app/features/authentication/screens/signup/widgets/terms_and_conditions.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:e_store_app/utils/contants/text_strings.dart';
