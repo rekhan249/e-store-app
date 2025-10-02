@@ -5,6 +5,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class UserControllerGoogle extends GetxController {
+  static UserControllerGoogle get instance => Get.find();
+
+  Rx<UserModel> user = UserModel.empty().obs;
+  final userRepo = Get.put(UserRepository());
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchUserDetails();
+  }
+
+  Future<void> fetchUserDetails() async {
+    try {
+      final user = await userRepo.fetchUserRecord();
+      this.user(user);
+    } catch (e) {
+      user(UserModel.empty());
+    }
+  }
+
   /// save users data against any registered provider
   Future<void> userSaveRecordOfGoogleOrFacebook(
       UserCredential? userCredential) async {
@@ -24,7 +44,7 @@ class UserControllerGoogle extends GetxController {
             email: userCredential.user!.email ?? '',
             phoneNum: userCredential.user!.phoneNumber ?? '',
             profilePicture: userCredential.user!.photoURL ?? '');
-        await UserRepository.instance.saveUserRecord(userModel);
+        await userRepo.saveUserRecord(userModel);
       }
     } catch (e) {
       LoggerHelper.warningSnakebar(

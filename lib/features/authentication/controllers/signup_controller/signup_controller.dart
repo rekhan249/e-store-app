@@ -67,7 +67,7 @@ class SignupController extends GetxController {
           profilePicture: "");
 
       final userRepo = Get.put(UserRepository());
-      userRepo.saveUserRecord(newUser);
+      await userRepo.saveUserRecord(newUser);
 
       /// show successfull message
       LoggerHelper.successSnakebar(title: "Congrate");
