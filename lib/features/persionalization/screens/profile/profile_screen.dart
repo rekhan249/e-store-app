@@ -1,6 +1,7 @@
 import 'package:e_store_app/common/widgets/appbar/custom_appbar.dart';
 import 'package:e_store_app/common/widgets/image/circular_image.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
+import 'package:e_store_app/data/repositories/authentic_repository.dart';
 import 'package:e_store_app/features/persionalization/screens/profile/widgets/custom_pro_menu.dart';
 import 'package:e_store_app/utils/contants/image_strings.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
@@ -71,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(height: SizesLW.spaceBtwItems),
               Center(
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () => AuthenticRepository.instance.logout(),
                     child: Text(
                       "Close Account",
                       style: TextStyle(color: Colors.red),

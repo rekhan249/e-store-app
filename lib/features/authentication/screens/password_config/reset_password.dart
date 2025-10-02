@@ -1,3 +1,5 @@
+import 'package:e_store_app/features/authentication/controllers/forget_password/forget_pass_controller.dart';
+import 'package:e_store_app/features/authentication/screens/login/login_screen.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:e_store_app/utils/contants/text_strings.dart';
 import 'package:flutter/cupertino.dart';
@@ -5,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ResetPassword extends StatelessWidget {
-  const ResetPassword({super.key});
+  final String email;
+  const ResetPassword({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +42,15 @@ class ResetPassword extends StatelessWidget {
               SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: () {}, child: Text(TextStrings.done))),
+                      onPressed: () => Get.offAll(() => LoginScreen()),
+                      child: Text(TextStrings.done))),
               SizedBox(height: SizesLW.spaceBtwItems),
               SizedBox(
                   width: double.infinity,
                   child: TextButton(
-                      onPressed: () {}, child: Text(TextStrings.resendEmail))),
+                      onPressed: () => ForgetPassController.instance
+                          .resendPasswordResetEmail(email),
+                      child: Text(TextStrings.resendEmail))),
             ],
           ),
         ),

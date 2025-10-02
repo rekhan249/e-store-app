@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:e_store_app/data/repositories/authentic_repository.dart';
 import 'package:e_store_app/features/persionalization/controllers/user_controller_google.dart';
+import 'package:e_store_app/navigate_menu.dart';
 import 'package:e_store_app/utils/contants/image_strings.dart';
 import 'package:e_store_app/utils/helpers/network_manage.dart';
 import 'package:e_store_app/utils/logging/logger.dart';
@@ -62,6 +63,7 @@ class LoginController extends GetxController {
 
       /// show successfull message
       LoggerHelper.successSnakebar(title: "Congrate");
+      Get.to(() => NavigateMenu());
     } catch (e) {
       /// catch and show the generic error to users
       LoggerHelper.errorSnakebar(title: "Oh Snap!", message: e.toString());
@@ -95,6 +97,7 @@ class LoginController extends GetxController {
 
       /// show successfull message
       LoggerHelper.successSnakebar(title: "Congrate");
+      Get.to(() => NavigateMenu());
     } catch (e) {
       FullScreenLoader.stopLoading();
 

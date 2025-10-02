@@ -119,6 +119,7 @@ class AuthenticRepository extends GetxController {
   /// [Logout] - loggingout from app
   Future<void> logout() async {
     try {
+      await GoogleSignIn().signOut();
       await _auth.signOut();
       Get.offAll(() => LoginScreen());
     } on FirebaseAuthException catch (e) {
