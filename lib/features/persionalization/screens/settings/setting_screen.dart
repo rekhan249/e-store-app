@@ -3,6 +3,7 @@ import 'package:e_store_app/common/widgets/custom_shapes/curved_edges/clippath_c
 import 'package:e_store_app/common/widgets/list_tiles/custom_menu_tile.dart';
 import 'package:e_store_app/common/widgets/list_tiles/custom_user_pro.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
+import 'package:e_store_app/features/persionalization/controllers/user_controller_google.dart';
 import 'package:e_store_app/features/persionalization/screens/address/addresses.dart';
 import 'package:e_store_app/features/persionalization/screens/profile/profile_screen.dart';
 import 'package:e_store_app/features/shop/screens/orders/order_screen.dart';
@@ -18,6 +19,7 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserControllerGoogle.instance;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -36,8 +38,8 @@ class SettingScreen extends StatelessWidget {
                 /// User Profile card
                 CustomUserProTile(
                   image: ImageStrings.rek,
-                  title: 'Coding with RE.KHAN',
-                  subTitle: 'rekhan2490@gmail.com',
+                  title: controller.user.value.fullName,
+                  subTitle: controller.user.value.email,
                   onPressed: () => Get.to(() => ProfileScreen()),
                 ),
                 SizedBox(height: SizesLW.spacesBtwSections),

@@ -40,6 +40,7 @@ dependencies:
   flutter_dotenv: ^6.0.0
   file_picker: ^10.3.3
   google_sign_in: ^6.3.0
+  shimmer: ^3.0.0
 
   # Product Specific
 

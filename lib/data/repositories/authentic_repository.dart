@@ -1,3 +1,4 @@
+import 'package:e_store_app/data/repositories/user/user_repository.dart';
 import 'package:e_store_app/features/authentication/screens/login/login_screen.dart';
 import 'package:e_store_app/features/authentication/screens/onboarding.dart';
 import 'package:e_store_app/features/authentication/screens/signup/verify_email.dart';
@@ -154,6 +155,44 @@ class AuthenticRepository extends GetxController {
 
       // Once signed in, return the UserCredential
       return await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthException(code: e.code).message!;
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, plugin: 'firebase_auth').message!;
+    } on FormatException catch (_) {
+      throw FormatException();
+    } on PlatformException catch (e) {
+      throw PlatformException(code: e.code).message!;
+    } catch (e) {
+      throw "Something went wrong, Please try again";
+    }
+  }
+
+  /// [RE-Authenticate] - reauthenticate user
+  Future<void> reAuthenticateWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      AuthCredential credential =
+          EmailAuthProvider.credential(email: email, password: password);
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthException(code: e.code).message!;
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, plugin: 'firebase_auth').message!;
+    } on FormatException catch (_) {
+      throw FormatException();
+    } on PlatformException catch (e) {
+      throw PlatformException(code: e.code).message!;
+    } catch (e) {
+      throw "Something went wrong, Please try again";
+    }
+  }
+
+  /// [Delete] - delete account from app
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
+      await _auth.currentUser?.delete();
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthException(code: e.code).message!;
     } on FirebaseException catch (e) {

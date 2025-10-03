@@ -1,11 +1,13 @@
 import 'package:e_store_app/common/widgets/appbar/custom_appbar.dart';
 import 'package:e_store_app/common/widgets/image/circular_image.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
-import 'package:e_store_app/data/repositories/authentic_repository.dart';
+import 'package:e_store_app/features/persionalization/controllers/user_controller_google.dart';
+import 'package:e_store_app/features/persionalization/screens/profile/widgets/change_name.dart';
 import 'package:e_store_app/features/persionalization/screens/profile/widgets/custom_pro_menu.dart';
 import 'package:e_store_app/utils/contants/image_strings.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -13,6 +15,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserControllerGoogle.instance;
     return Scaffold(
       appBar: CustomAppbar(showBackArrow: true, title: Text("Profile")),
       body: SingleChildScrollView(
@@ -38,10 +41,12 @@ class ProfileScreen extends StatelessWidget {
                   title: "Profile Information", showActionButton: false),
               SizedBox(height: SizesLW.spaceBtwItems),
               CustomProfileMenu(
-                  title: "Name", value: "Coding with REKham", onPressed: () {}),
+                  title: "Name",
+                  value: controller.user.value.fullName,
+                  onPressed: () => Get.to(() => ChangeName())),
               CustomProfileMenu(
                   title: "Username",
-                  value: "Coding with REKham",
+                  value: controller.user.value.username,
                   onPressed: () {}),
               SizedBox(height: SizesLW.spaceBtwItems),
               Divider(),
@@ -50,17 +55,17 @@ class ProfileScreen extends StatelessWidget {
                   title: "Personal Information", showActionButton: false),
               SizedBox(height: SizesLW.spaceBtwItems),
               CustomProfileMenu(
-                  title: "User ID",
+                  title: controller.user.value.id,
                   value: "5226",
                   iconData: Iconsax.copy,
                   onPressed: () {}),
               CustomProfileMenu(
                   title: "E-mail",
-                  value: "rekhan2490@gmail.com",
+                  value: controller.user.value.email,
                   onPressed: () {}),
               CustomProfileMenu(
                   title: "Phone No.",
-                  value: "+92-347-8118327",
+                  value: controller.user.value.phoneNum,
                   onPressed: () {}),
               CustomProfileMenu(
                   title: "Gender", value: "Male", onPressed: () {}),
@@ -72,7 +77,8 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(height: SizesLW.spaceBtwItems),
               Center(
                 child: TextButton(
-                    onPressed: () => AuthenticRepository.instance.logout(),
+                    onPressed: () => UserControllerGoogle.instance
+                        .deleteAccountWarningPopup(),
                     child: Text(
                       "Close Account",
                       style: TextStyle(color: Colors.red),
