@@ -74,7 +74,7 @@ class UserControllerGoogle extends GetxController {
         title: "Delete Account",
         middleText: "Are you want to sure to delete yours account?",
         confirm: ElevatedButton(
-          onPressed: () async => deleteUserAccount,
+          onPressed: () async => deleteUserAccount(),
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red, side: BorderSide(color: Colors.red)),
           child: Padding(
