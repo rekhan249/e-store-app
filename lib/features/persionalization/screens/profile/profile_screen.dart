@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_store_app/common/widgets/appbar/custom_appbar.dart';
 import 'package:e_store_app/common/widgets/image/circular_image.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
@@ -27,10 +29,19 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    CircularImage(
-                        image: ImageStrings.rek, width: 80, height: 80),
+                    Obx(() {
+                      final networkImage = controller.user.value.profilePicture;
+                      final image = networkImage.isNotEmpty
+                          ? networkImage
+                          : ImageStrings.rek;
+                      return CircularImage(
+                          image: image,
+                          width: 80,
+                          height: 80,
+                          isNetworkImage: networkImage.isNotEmpty);
+                    }),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () => controller.uploadUsersProfiePicture(),
                         child: Text("Change profile picture")),
                   ],
                 ),

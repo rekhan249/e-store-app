@@ -8,6 +8,7 @@ import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:e_store_app/utils/helpers/network_manage.dart';
 import 'package:e_store_app/utils/logging/logger.dart';
 import 'package:e_store_app/utils/popups/full_screen_loader.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,22 +45,27 @@ class UserControllerGoogle extends GetxController {
   Future<void> userSaveRecordOfGoogleOrFacebook(
       UserCredential? userCredential) async {
     try {
-      if (userCredential != null) {
-        /// split name into two parts first and last
-        final nameParts =
-            UserModel.nameParts(userCredential.user!.displayName ?? '');
-        final username =
-            UserModel.generateUserName(userCredential.user!.displayName ?? '');
-        final UserModel userModel = UserModel(
-            id: userCredential.user!.uid,
-            firstName: nameParts[0],
-            lastName:
-                nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
-            username: username,
-            email: userCredential.user!.email ?? '',
-            phoneNum: userCredential.user!.phoneNumber ?? '',
-            profilePicture: userCredential.user!.photoURL ?? '');
-        await userRepo.saveUserRecord(userModel);
+      /// First update Rx user and then check the data is alrady stored or not
+      await fetchUserDetails();
+
+      if (user.value.id.isEmpty) {
+        if (userCredential != null) {
+          /// split name into two parts first and last
+          final nameParts =
+              UserModel.nameParts(userCredential.user!.displayName ?? '');
+          final username = UserModel.generateUserName(
+              userCredential.user!.displayName ?? '');
+          final UserModel userModel = UserModel(
+              id: userCredential.user!.uid,
+              firstName: nameParts[0],
+              lastName:
+                  nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+              username: username,
+              email: userCredential.user!.email ?? '',
+              phoneNum: userCredential.user!.phoneNumber ?? '',
+              profilePicture: userCredential.user!.photoURL ?? '');
+          await userRepo.saveUserRecord(userModel);
+        }
       }
     } catch (e) {
       LoggerHelper.warningSnakebar(
@@ -132,6 +138,24 @@ class UserControllerGoogle extends GetxController {
           verifyEmail.text.trim(), verifyPassword.text.trim());
       await AuthenticRepository.instance.deleteAccount();
       FullScreenLoader.stopLoading();
+    } catch (e) {
+      FullScreenLoader.stopLoading();
+      LoggerHelper.errorSnakebar(title: "Oh Snap");
+    }
+  }
+
+  /// upload the profile imamge
+  uploadUsersProfiePicture() async {
+    try {
+      final image = await FilePicker.platform.pickFiles(type: FileType.image);
+      if (image != null) {
+        final imageUrl = await userRepo.uploadToCloudinary(image);
+        Map<String, dynamic> map = {'profilePicture': imageUrl};
+        await userRepo.updateAnyUserFieldRecord(map);
+        user.value.profilePicture = imageUrl;
+      }
+
+      LoggerHelper.successSnakebar(title: "Contrages");
     } catch (e) {
       FullScreenLoader.stopLoading();
       LoggerHelper.errorSnakebar(title: "Oh Snap");
