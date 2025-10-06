@@ -153,9 +153,10 @@ class UserControllerGoogle extends GetxController {
         Map<String, dynamic> map = {'profilePicture': imageUrl};
         await userRepo.updateAnyUserFieldRecord(map);
         user.value.profilePicture = imageUrl;
-      }
+        user.refresh();
 
-      LoggerHelper.successSnakebar(title: "Contrages");
+        LoggerHelper.successSnakebar(title: "Contrages");
+      }
     } catch (e) {
       FullScreenLoader.stopLoading();
       LoggerHelper.errorSnakebar(title: "Oh Snap");
