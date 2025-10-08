@@ -1,6 +1,7 @@
+import 'package:e_store_app/common/widgets/image/circular_image.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
-import 'package:e_store_app/utils/contants/image_strings.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
+import 'package:e_store_app/utils/helpers/e_helper_func.dart';
 import 'package:flutter/material.dart';
 
 class CustomVerticalTextImage extends StatelessWidget {
@@ -8,6 +9,7 @@ class CustomVerticalTextImage extends StatelessWidget {
   final Color? textColor, backgroundColor;
   final bool dark;
   final VoidCallback onTap;
+  final bool isNetworkImage;
   const CustomVerticalTextImage(
       {super.key,
       required this.image,
@@ -15,30 +17,24 @@ class CustomVerticalTextImage extends StatelessWidget {
       this.textColor = EStoreColors.white,
       this.backgroundColor,
       required this.onTap,
-      required this.dark});
+      required this.dark,
+      this.isNetworkImage = true});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = EHelperFunc.isDarkMode(context);
     return GestureDetector(
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(right: SizesLW.spaceBtwItems),
         child: Column(children: [
-          Container(
-            width: 50,
-            height: 50,
-            padding: EdgeInsets.all(SizesLW.sm),
-            decoration: BoxDecoration(
-                color: backgroundColor ??
-                    (dark ? EStoreColors.black : EStoreColors.white),
-                borderRadius: BorderRadius.circular(100)),
-            child: Center(
-                child: Image(
-              image: AssetImage(ImageStrings.shoesIcon),
-              fit: BoxFit.cover,
-              color: dark ? EStoreColors.dark : EStoreColors.light,
-            )),
-          ),
+          CircularImage(
+              image: image,
+              fit: BoxFit.fitWidth,
+              padding: SizesLW.sm * 1.4,
+              isNetworkImage: isNetworkImage,
+              backgroundColor: backgroundColor,
+              overLayColor: isDark ? EStoreColors.light : EStoreColors.dark),
           SizedBox(height: SizesLW.spaceBtwItems / 2),
           SizedBox(
             width: 55,

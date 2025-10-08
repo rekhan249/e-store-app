@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:e_store_app/common/widgets/appbar/custom_appbar.dart';
 import 'package:e_store_app/common/widgets/image/circular_image.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';

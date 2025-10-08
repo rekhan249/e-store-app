@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_store_app/data/repositories/categories/categories_repo.dart';
 import 'package:e_store_app/features/shop/models/category_model.dart';
 import 'package:e_store_app/utils/logging/logger.dart';
@@ -27,17 +29,20 @@ class CategoriesController extends GetxController {
       final categories = await _categoryReposit.getAllCategories();
       allCategories.assignAll(categories);
       featuresCategoris.assignAll(allCategories
-          .where((categories) =>
-              categories.isFeatured && categories.parentId.isEmpty)
+          .where((category) => category.isFeatured && category.parentId.isEmpty)
           .take(8)
           .toList());
+
+      log(featuresCategoris.asMap().toString());
 
       /// Update categories list
 
       ///Filter Feature  Categories
     } catch (e) {
       LoggerHelper.errorSnakebar(title: "Oh Snap");
-    } finally {}
+    } finally {
+      isloading.value = false;
+    }
   }
 
   /// load selected category data
