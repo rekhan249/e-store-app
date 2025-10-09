@@ -26,8 +26,8 @@ class CustomVerticalTextImage extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.only(right: SizesLW.spaceBtwItems),
-        child: Column(children: [
+        padding: EdgeInsets.only(right: SizesLW.spaceBtwItems),
+        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           CircularImage(
               image: image,
               fit: BoxFit.fitWidth,

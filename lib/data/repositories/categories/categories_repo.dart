@@ -14,11 +14,11 @@ class CategoriesRepo extends GetxController {
 
   Future<List<CategoryModel>> getAllCategories() async {
     try {
-      final snapShot = await _db.collection("Categories").get();
-      final list = snapShot.docs
+      final snapShot = await _db.collection("categories").get();
+      final catList = snapShot.docs
           .map((document) => CategoryModel.fromMap(document))
           .toList();
-      return list;
+      return catList;
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthException(code: e.code).message!;
     } on FirebaseException catch (e) {
