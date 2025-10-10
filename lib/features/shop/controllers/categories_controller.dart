@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:e_store_app/data/repositories/categories/categories_repo.dart';
 import 'package:e_store_app/features/shop/models/category_model.dart';
 import 'package:e_store_app/utils/logging/logger.dart';
@@ -32,8 +30,6 @@ class CategoriesController extends GetxController {
           .where((category) => category.isFeatured && category.parentId.isEmpty)
           .take(8)
           .toList());
-
-      log(featuresCategoris.asMap().toString());
 
       /// Update categories list
 

@@ -27,26 +27,30 @@ class CustomVerticalTextImage extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.only(right: SizesLW.spaceBtwItems),
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          CircularImage(
-              image: image,
-              fit: BoxFit.fitWidth,
-              padding: SizesLW.sm * 1.4,
-              isNetworkImage: isNetworkImage,
-              backgroundColor: backgroundColor,
-              overLayColor: isDark ? EStoreColors.light : EStoreColors.dark),
-          SizedBox(height: SizesLW.spaceBtwItems / 2),
-          SizedBox(
-            width: 55,
-            child: Text(title,
-                style: Theme.of(context)
-                    .textTheme
-                    .labelMedium!
-                    .apply(color: EStoreColors.white),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis),
-          )
-        ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CircularImage(
+                image: image,
+                fit: BoxFit.fitWidth,
+                padding: SizesLW.sm * 1.4,
+                isNetworkImage: isNetworkImage,
+                backgroundColor: backgroundColor,
+                overLayColor: isDark ? EStoreColors.light : EStoreColors.dark),
+            SizedBox(height: SizesLW.spaceBtwItems / 2),
+            SizedBox(
+              width: 55,
+              child: Text(title,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .apply(color: EStoreColors.white),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis),
+            )
+          ],
+        ),
       ),
     );
   }
