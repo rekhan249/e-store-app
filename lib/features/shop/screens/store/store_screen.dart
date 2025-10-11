@@ -4,6 +4,7 @@ import 'package:e_store_app/common/widgets/layouts/grid_layout_custom.dart';
 import 'package:e_store_app/common/widgets/products/cart/custom_cart_counter.dart';
 import 'package:e_store_app/common/widgets/products/product_and_brands/brand_card.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
+import 'package:e_store_app/features/shop/controllers/categories_controller.dart';
 import 'package:e_store_app/features/shop/screens/store/widgets/categories_tabs.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
@@ -15,8 +16,9 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categories = CategoriesController.instance.featuresCategoris;
     return DefaultTabController(
-      length: 5,
+      length: categories.length,
       child: Scaffold(
         appBar: AppBar(
           title:
@@ -68,23 +70,17 @@ class StoreScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  bottom: CustomTabBar(tabs: [
-                    Tab(child: Text("Sports")),
-                    Tab(child: Text("Furniture")),
-                    Tab(child: Text("Electronics")),
-                    Tab(child: Text("Clothes")),
-                    Tab(child: Text("Cosmetics")),
-                  ]),
+                  bottom: CustomTabBar(
+                      tabs: categories
+                          .map((category) => Tab(child: Text(category.name)))
+                          .toList()),
                 ),
               ];
             },
-            body: TabBarView(children: [
-              CategoriesTabs(),
-              CategoriesTabs(),
-              CategoriesTabs(),
-              CategoriesTabs(),
-              CategoriesTabs(),
-            ])),
+            body: TabBarView(
+                children: categories
+                    .map((category) => CategoriesTabs(category: category))
+                    .toList())),
       ),
     );
   }

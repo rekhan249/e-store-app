@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_store_app/data/repositories/authentic_repository.dart';
+import 'package:e_store_app/data/services/firebase_storage.dart';
+import 'package:e_store_app/features/shop/models/category_model.dart';
 import 'package:e_store_app/models/signup_model.dart';
 import 'package:e_store_app/utils/logging/logger.dart';
 import 'package:file_picker/file_picker.dart';
@@ -142,6 +144,38 @@ class UserRepository extends GetxController {
             message: "no image uploaded yet${response.statusCode}");
       }
       return imageUrl!;
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, plugin: 'signup').message!;
+    } on FormatException catch (_) {
+      throw FormatException();
+    } on PlatformException catch (e) {
+      throw PlatformException(code: e.code).message!;
+    } catch (e) {
+      throw "Something went wrong, Please try again";
+    }
+  }
+
+  Future<void> uploadDummyData(List<CategoryModel> categories) async {
+    try {
+      /// Upload all inage with their categories
+      final storageCloudinary = Get.put(CustomCloudinaryStorageServices());
+
+      /// loop through each categories
+      for (var category in categories) {
+        /// Get ImageData link from the local assets
+        final file =
+            await storageCloudinary.getImageDataFromAssets(category.image);
+
+        /// upload Image and get its Url
+        final url =
+            await storageCloudinary.uploadToCloudinary(file, category.image);
+
+        category.image = url;
+        await _db
+            .collection("categories")
+            .doc(category.id)
+            .set(category.toMap());
+      }
     } on FirebaseException catch (e) {
       throw FirebaseException(code: e.code, plugin: 'signup').message!;
     } on FormatException catch (_) {

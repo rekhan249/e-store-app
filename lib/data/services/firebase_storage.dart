@@ -20,7 +20,8 @@ class CustomCloudinaryStorageServices extends GetxController {
   }
 
   // Upload image data (bytes) to Cloudinary
-  Future<String> uploadToCloudinary(Uint8List? imageBytes) async {
+  Future<String> uploadToCloudinary(
+      Uint8List? imageBytes, String filename) async {
     try {
       if (imageBytes == null || imageBytes.isEmpty) {
         LoggerHelper.errorSnakebar(
@@ -30,8 +31,7 @@ class CustomCloudinaryStorageServices extends GetxController {
 
       // Write bytes to a temporary file
       final tempDir = await getTemporaryDirectory();
-      final filename =
-          'temp_image_${DateTime.now().millisecondsSinceEpoch}.jpg'; // or any extension
+      // or any extension
       final tempPath = '${tempDir.path}/$filename';
       final files = File(tempPath);
       await files.writeAsBytes(imageBytes);
