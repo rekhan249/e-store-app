@@ -1,7 +1,41 @@
+import 'package:e_store_app/features/shop/models/banner_model.dart';
 import 'package:e_store_app/features/shop/models/category_model.dart';
+import 'package:e_store_app/routes/routes.dart';
 import 'package:e_store_app/utils/contants/image_strings.dart';
 
 class DummyData {
+  /// Banners
+  static final List<BannerModel> banners = [
+    BannerModel(
+        imageUrl: ImageStrings.promoBan1,
+        targetScreen: CustomRoutes.order,
+        active: false),
+    BannerModel(
+        imageUrl: ImageStrings.promoBan2,
+        targetScreen: CustomRoutes.cart,
+        active: false),
+    BannerModel(
+        imageUrl: ImageStrings.promoBan3,
+        targetScreen: CustomRoutes.favorite,
+        active: false),
+    BannerModel(
+        imageUrl: ImageStrings.promoBan1,
+        targetScreen: CustomRoutes.search,
+        active: false),
+    BannerModel(
+        imageUrl: ImageStrings.promoBan2,
+        targetScreen: CustomRoutes.settings,
+        active: false),
+    BannerModel(
+        imageUrl: ImageStrings.promoBan3,
+        targetScreen: CustomRoutes.userAddress,
+        active: false),
+    BannerModel(
+        imageUrl: ImageStrings.promoBan1,
+        targetScreen: CustomRoutes.checkout,
+        active: false)
+  ];
+
   ///  Categories
   static final List<CategoryModel> categories = [
     CategoryModel(
