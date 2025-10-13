@@ -3,6 +3,7 @@ import 'package:e_store_app/common/widgets/products/cart/product_price_text.dart
 import 'package:e_store_app/common/widgets/texts/brandtitle_verifyicon.dart';
 import 'package:e_store_app/common/widgets/texts/product_title.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
+import 'package:e_store_app/features/shop/models/product_model.dart';
 import 'package:e_store_app/features/shop/screens/product_details/widgets/bottom_add_to_cart.dart';
 import 'package:e_store_app/features/shop/screens/product_details/widgets/product_attributes.dart';
 import 'package:e_store_app/features/shop/screens/product_details/widgets/product_details_image_slider.dart';
@@ -20,7 +21,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key});
+  final ProductModel product;
+  const ProductDetails({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {

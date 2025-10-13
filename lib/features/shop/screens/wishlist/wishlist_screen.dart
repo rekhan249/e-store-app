@@ -1,7 +1,5 @@
 import 'package:e_store_app/common/widgets/Appbar/custom_appbar.dart';
 import 'package:e_store_app/common/widgets/icons/circular_icon.dart';
-import 'package:e_store_app/common/widgets/layouts/grid_layout_custom.dart';
-import 'package:e_store_app/common/widgets/products/product_and_brands/product_card_vert.dart';
 import 'package:e_store_app/features/shop/screens/home/home_screen.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:e_store_app/utils/helpers/e_helper_func.dart';
@@ -32,9 +30,9 @@ class WishlistScreen extends StatelessWidget {
         padding: EdgeInsets.all(SizesLW.defaultSpaces),
         child: Column(
           children: [
-            GridLayoutCustom(
-                itemCount: 6,
-                itemBuilder: (context, index) => ProductCardVert())
+            // GridLayoutCustom(
+            //     itemCount: 6,
+            //     itemBuilder: (context, index) => ProductCardVert())
           ],
         ),
       )),

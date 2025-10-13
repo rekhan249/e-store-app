@@ -1,6 +1,4 @@
-import 'package:e_store_app/common/widgets/layouts/grid_layout_custom.dart';
 import 'package:e_store_app/common/widgets/products/product_and_brands/brand_showcase.dart';
-import 'package:e_store_app/common/widgets/products/product_and_brands/product_card_vert.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
 import 'package:e_store_app/features/shop/models/category_model.dart';
 import 'package:e_store_app/utils/contants/image_strings.dart';
@@ -37,9 +35,9 @@ class CategoriesTabs extends StatelessWidget {
               /// --- Products that might you liked
               SectionHeading(title: "You might like", onPressed: () {}),
               SizedBox(height: SizesLW.spaceBtwItems),
-              GridLayoutCustom(
-                  itemCount: 4,
-                  itemBuilder: (context, index) => ProductCardVert()),
+              // GridLayoutCustom(
+              //     itemCount: 4,
+              //     itemBuilder: (context, index) => ProductCardVert()),
               SizedBox(height: SizesLW.spacesBtwSections),
             ],
           ),

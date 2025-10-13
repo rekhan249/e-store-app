@@ -1,11 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_store_app/features/shop/models/brand_model.dart';
 import 'package:e_store_app/features/shop/models/product_attri_model.dart';
 import 'package:e_store_app/features/shop/models/product_vari_model.dart';
-import 'package:flutter/material.dart';
 
 class ProductModel {
   String id;

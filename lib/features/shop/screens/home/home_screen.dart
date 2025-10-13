@@ -1,8 +1,10 @@
+import 'package:e_store_app/common/styles/shimmer_effect.dart';
 import 'package:e_store_app/common/widgets/custom_shapes/containers/custom_search.dart';
 import 'package:e_store_app/common/widgets/custom_shapes/curved_edges/clippath_custom_curved.dart';
 import 'package:e_store_app/common/widgets/layouts/grid_layout_custom.dart';
 import 'package:e_store_app/common/widgets/products/product_and_brands/product_card_vert.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
+import 'package:e_store_app/features/shop/controllers/product_controller.dart';
 import 'package:e_store_app/features/shop/screens/all_products/all_products.dart';
 import 'package:e_store_app/features/shop/screens/home/widgets/custom_home_category/custom_home_cat.dart';
 import 'package:e_store_app/features/shop/screens/home/widgets/home_custom_appbar.dart';
@@ -18,6 +20,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     final dark = EHelperFunc.isDarkMode(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -70,9 +73,20 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: SizesLW.spaceBtwItems),
 
                   /// --- Popular Products
-                  GridLayoutCustom(
-                      itemCount: 4,
-                      itemBuilder: (context, index) => ProductCardVert()),
+                  Obx(
+                    () {
+                      if (controller.isLoading.value) return ShimmerEffect();
+                      if (controller.featuredProducts.isEmpty) {
+                        return Center(
+                            child: Text("Data not found",
+                                style: Theme.of(context).textTheme.bodyMedium));
+                      }
+                      return GridLayoutCustom(
+                          itemCount: controller.featuredProducts.length,
+                          itemBuilder: (context, index) => ProductCardVert(
+                              product: controller.featuredProducts[index]));
+                    },
+                  ),
                 ],
               ),
             ),
