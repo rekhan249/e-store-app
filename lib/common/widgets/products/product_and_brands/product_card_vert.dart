@@ -5,9 +5,11 @@ import 'package:e_store_app/common/widgets/image/image_round.dart';
 import 'package:e_store_app/common/widgets/products/cart/product_price_text.dart';
 import 'package:e_store_app/common/widgets/texts/brandtitle_verifyicon.dart';
 import 'package:e_store_app/common/widgets/texts/product_title.dart';
+import 'package:e_store_app/features/shop/controllers/product_controller.dart';
 import 'package:e_store_app/features/shop/models/product_model.dart';
 import 'package:e_store_app/features/shop/screens/product_details/product_details.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
+import 'package:e_store_app/utils/contants/enums.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:e_store_app/utils/helpers/e_helper_func.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,9 @@ class ProductCardVert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final controller = ProductController.instance;
+    final controller = ProductController.instance;
+    final salePercentage =
+        controller.calSalePercentage(product.price, product.salePrice);
     final isDark = EHelperFunc.isDarkMode(context);
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetails(product: product)),
@@ -52,7 +56,7 @@ class ProductCardVert extends StatelessWidget {
                           EStoreColors.secondary.withValues(alpha: 0.8),
                       padding: EdgeInsets.symmetric(
                           horizontal: SizesLW.sm, vertical: SizesLW.xs),
-                      child: Text("25%",
+                      child: Text("$salePercentage%",
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge!
@@ -87,8 +91,26 @@ class ProductCardVert extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       /// Price Tag
-                      ProductPriceText(
-                        price: '35.5',
+                      Flexible(
+                        child: Column(
+                          children: [
+                            if (product.productType ==
+                                    ProductType.single.toString() &&
+                                product.salePrice > 0)
+                              Padding(
+                                  padding: EdgeInsets.only(left: SizesLW.sm),
+                                  child: Text(product.price.toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium!
+                                          .apply(
+                                              decoration:
+                                                  TextDecoration.lineThrough))),
+                            ProductPriceText(
+                              price: controller.getProductPrice(product),
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         decoration: BoxDecoration(
