@@ -1,3 +1,4 @@
+import 'package:e_store_app/admin_panel/upload_data/upload_data_screen.dart';
 import 'package:e_store_app/common/widgets/Appbar/custom_appbar.dart';
 import 'package:e_store_app/common/widgets/custom_shapes/curved_edges/clippath_custom_curved.dart';
 import 'package:e_store_app/common/widgets/list_tiles/custom_menu_tile.dart';
@@ -90,9 +91,11 @@ class SettingScreen extends StatelessWidget {
                 SectionHeading(title: "App Settings", showActionButton: false),
                 SizedBox(height: SizesLW.spaceBtwItems),
                 CustomMenuTile(
-                    title: "Load Data",
-                    subTitle: "Upload Data to your cloud firebase",
-                    iconData: Iconsax.document_upload),
+                  title: "Load Data",
+                  subTitle: "Upload Data to your cloud firebase",
+                  iconData: Iconsax.document_upload,
+                  onTap: () => Get.to(() => UploadDataScreen()),
+                ),
                 CustomMenuTile(
                     title: "Geolocation",
                     subTitle: "Set recommendation based on location",
