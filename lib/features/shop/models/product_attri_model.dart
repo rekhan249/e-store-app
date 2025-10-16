@@ -1,13 +1,13 @@
 class ProductAttributeModel {
   String? name;
-  final List<String>? value;
+  final List<String>? values;
 
-  ProductAttributeModel({this.name, this.value});
+  ProductAttributeModel({this.name, this.values});
 
   Map<String, dynamic> toMap() {
     return {
       'name': name,
-      'value': value,
+      'values': values,
     };
   }
 
@@ -16,6 +16,6 @@ class ProductAttributeModel {
     if (map.isEmpty) return ProductAttributeModel();
     return ProductAttributeModel(
         name: map.containsKey('name') ? map['name'] : '',
-        value: List<String>.from(map['value']));
+        values: List<String>.from(map['values']));
   }
 }

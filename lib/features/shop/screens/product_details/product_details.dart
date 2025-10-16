@@ -31,7 +31,7 @@ class ProductDetails extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(children: [
           /// 1 - Product Image Slider
-          ProductImageSilder(),
+          ProductImageSilder(product: product),
 
           /// 2 - Product details
           Padding(

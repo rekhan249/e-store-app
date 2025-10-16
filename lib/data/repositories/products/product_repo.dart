@@ -21,6 +21,7 @@ class ProductRepo extends GetxController {
           .where("isFeatured", isEqualTo: true)
           .limit(4)
           .get();
+
       return snapShot.docs.map((e) => ProductModel.fromMap(e)).toList();
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthException(code: e.code).message!;

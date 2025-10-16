@@ -45,7 +45,9 @@ class ProductCardVert extends StatelessWidget {
               child: Stack(
                 children: [
                   ImageRoundHome(
-                      imageUrl: product.thumbnail, applyImageRadius: true),
+                      imageUrl: product.thumbnail,
+                      applyImageRadius: true,
+                      isNetworkImage: true),
 
                   /// -- Sale Tag
                   Positioned(

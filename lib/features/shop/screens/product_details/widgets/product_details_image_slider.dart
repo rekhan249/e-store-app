@@ -2,6 +2,7 @@ import 'package:e_store_app/common/widgets/appbar/custom_appbar.dart';
 import 'package:e_store_app/common/widgets/custom_shapes/curved_edges/clippath_custom_curved.dart';
 import 'package:e_store_app/common/widgets/icons/circular_icon.dart';
 import 'package:e_store_app/common/widgets/image/image_round.dart';
+import 'package:e_store_app/features/shop/models/product_model.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
 import 'package:e_store_app/utils/contants/image_strings.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
@@ -10,7 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductImageSilder extends StatelessWidget {
-  const ProductImageSilder({super.key});
+  final ProductModel product;
+  const ProductImageSilder({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {

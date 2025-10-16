@@ -18,7 +18,7 @@ class ProductModel {
   String? categoryId;
   List<String>? images;
   String productType;
-  List<ProductAttributeModel>? productAttributes;
+  List<ProductAttributeModel>? productAtrributes;
   List<ProductVariationModel>? productVariations;
 
   ProductModel({
@@ -36,7 +36,7 @@ class ProductModel {
     this.categoryId,
     this.images,
     required this.productType,
-    this.productAttributes,
+    this.productAtrributes,
     this.productVariations,
   });
 
@@ -59,8 +59,8 @@ class ProductModel {
       'categoryId': categoryId,
       'images': images ?? [],
       'productType': productType,
-      'productAttributes': productAttributes != null
-          ? productAttributes!.map((x) => x.toMap()).toList()
+      'productAtrributes': productAtrributes != null
+          ? productAtrributes!.map((x) => x.toMap()).toList()
           : [],
       'productVariations': productVariations != null
           ? productVariations!.map((x) => x.toMap()).toList()
@@ -88,7 +88,7 @@ class ProductModel {
         categoryId: map['categoryId'] ?? "",
         images: map['images'] != null ? List<String>.from((map['images'])) : [],
         productType: map['productType'] ?? "",
-        productAttributes: (map["productAttributes"] as List<dynamic>)
+        productAtrributes: (map["productAtrributes"] as List<dynamic>)
             .map((e) => ProductAttributeModel.fromMap(e))
             .toList(),
         productVariations: (map["productVariations"] as List<dynamic>)
