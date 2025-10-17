@@ -1,4 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_store_app/features/shop/models/product_model.dart';
+import 'package:e_store_app/utils/contants/sizeslw.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ImagesController extends GetxController {
@@ -31,5 +34,31 @@ class ImagesController extends GetxController {
   }
 
   ///-- Show Image popup
-  void showEnlargeImage(String image) {}
+  void showEnlargeImage(String image) {
+    Get.to(
+        fullscreenDialog: true,
+        () => Dialog.fullscreen(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: SizesLW.defaultSpaces,
+                        vertical: SizesLW.defaultSpaces * 2),
+                    child: CachedNetworkImage(imageUrl: image),
+                  ),
+                  SizedBox(height: SizesLW.spacesBtwSections),
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                          width: 150,
+                          child: OutlinedButton(
+                              onPressed: () => Get.back(),
+                              child: Text("Close"))))
+                ],
+              ),
+            ));
+  }
 }
