@@ -62,17 +62,19 @@ class ProductImageSilder extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final selectedimage =
                         controller.selectProductImage.value = images[index];
-                    return ImageRoundHome(
-                        width: 80,
-                        isNetworkImage: true,
-                        padding: EdgeInsets.all(SizesLW.sm),
-                        border: Border.all(
-                            color: selectedimage.isNotEmpty
-                                ? EStoreColors.primary
-                                : Colors.transparent),
-                        backgroundColor:
-                            isDark ? EStoreColors.dark : EStoreColors.white,
-                        imageUrl: images[index]);
+                    return Obx(
+                      () => ImageRoundHome(
+                          width: 80,
+                          isNetworkImage: true,
+                          padding: EdgeInsets.all(SizesLW.sm),
+                          border: Border.all(
+                              color: selectedimage.isNotEmpty
+                                  ? EStoreColors.primary
+                                  : Colors.transparent),
+                          backgroundColor:
+                              isDark ? EStoreColors.dark : EStoreColors.white,
+                          imageUrl: images[index]),
+                    );
                   },
                   separatorBuilder: (_, __) =>
                       SizedBox(width: SizesLW.spaceBtwItems),

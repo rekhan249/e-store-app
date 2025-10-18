@@ -13,7 +13,7 @@ class ImagesController extends GetxController {
   ///-- Get All images from product and variation
   List<String> getAllProductImages(ProductModel product) {
     /// use set to add unique images only
-    Set<String> images = {};
+    RxSet<String> images = <String>{}.obs;
     // load images
     images.add(product.thumbnail);
 
