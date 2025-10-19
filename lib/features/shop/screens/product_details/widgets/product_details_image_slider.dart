@@ -34,13 +34,16 @@ class ProductImageSilder extends StatelessWidget {
                 child: Obx(
                   () {
                     final image = controller.selectProductImage.value;
-                    return CachedNetworkImage(
-                      imageUrl: image,
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) =>
-                              CircularProgressIndicator(
-                                  value: downloadProgress.progress,
-                                  color: EStoreColors.primary),
+                    return GestureDetector(
+                      onTap: () => controller.showEnlargeImage(image),
+                      child: CachedNetworkImage(
+                        imageUrl: image,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    value: downloadProgress.progress,
+                                    color: EStoreColors.primary),
+                      ),
                     );
                   },
                 ),
@@ -50,37 +53,42 @@ class ProductImageSilder extends StatelessWidget {
 
           /// Image Slider
           Positioned(
-            right: 0,
-            bottom: 30,
-            left: SizesLW.defaultSpaces,
-            child: SizedBox(
-              height: 80,
-              child: ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  physics: AlwaysScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final selectedimage =
-                        controller.selectProductImage.value = images[index];
-                    return Obx(
-                      () => ImageRoundHome(
-                          width: 80,
-                          isNetworkImage: true,
-                          padding: EdgeInsets.all(SizesLW.sm),
-                          border: Border.all(
-                              color: selectedimage.isNotEmpty
-                                  ? EStoreColors.primary
-                                  : Colors.transparent),
-                          backgroundColor:
-                              isDark ? EStoreColors.dark : EStoreColors.white,
-                          imageUrl: images[index]),
-                    );
-                  },
-                  separatorBuilder: (_, __) =>
-                      SizedBox(width: SizesLW.spaceBtwItems),
-                  itemCount: images.length),
-            ),
-          ),
+              right: 0,
+              bottom: 30,
+              left: SizesLW.defaultSpaces,
+              child: SizedBox(
+                  height: 80,
+                  child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: images.length,
+                      scrollDirection: Axis.horizontal,
+                      physics: AlwaysScrollableScrollPhysics(),
+                      itemBuilder: (context, index) => Obx(() {
+                            final image = images[index];
+                            if (image.isEmpty) {
+                              return SizedBox.shrink();
+                            }
+                            final isSelected =
+                                controller.selectProductImage.value == image;
+                            return ImageRoundHome(
+                                onTap: () =>
+                                    controller.selectProductImage.value = image,
+                                width: 80,
+                                isNetworkImage: true,
+                                padding: EdgeInsets.all(SizesLW.sm),
+                                border: Border.all(
+                                    color: isSelected
+                                        ? EStoreColors.primary
+                                        : Colors.transparent),
+                                backgroundColor: isDark
+                                    ? EStoreColors.dark
+                                    : EStoreColors.white,
+                                imageUrl: image.isNotEmpty
+                                    ? image
+                                    : 'https://via.placeholder.com/150');
+                          }),
+                      separatorBuilder: (_, __) =>
+                          SizedBox(width: SizesLW.spaceBtwItems)))),
 
           /// Appbar Icons
           CustomAppbar(

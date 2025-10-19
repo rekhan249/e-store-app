@@ -51,7 +51,7 @@ class ProductController extends GetxController {
 
         /// Update smallest and largest price
         if (considerPrice < smallestPrice) {
-          considerPrice = smallestPrice;
+          smallestPrice = considerPrice;
         }
 
         /// Update smallest and largest price

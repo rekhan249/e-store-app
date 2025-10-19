@@ -3,13 +3,17 @@ import 'package:e_store_app/common/widgets/custom_shapes/containers/circular_con
 import 'package:e_store_app/common/widgets/products/cart/product_price_text.dart';
 import 'package:e_store_app/common/widgets/texts/product_title.dart';
 import 'package:e_store_app/common/widgets/texts/section_heading.dart';
+import 'package:e_store_app/features/shop/models/product_model.dart';
 import 'package:e_store_app/utils/contants/colors.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
 import 'package:e_store_app/utils/helpers/e_helper_func.dart';
 import 'package:flutter/material.dart';
 
 class ProductAttributes extends StatelessWidget {
-  const ProductAttributes({super.key});
+  final ProductModel product;
+  final bool isDark;
+  const ProductAttributes(
+      {super.key, required this.product, required this.isDark});
 
   @override
   Widget build(BuildContext context) {
@@ -66,39 +70,24 @@ class ProductAttributes extends StatelessWidget {
         SizedBox(height: SizesLW.spaceBtwItems),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SectionHeading(title: "Colors"),
-            SizedBox(height: SizesLW.spaceBtwItems / 2),
-            Wrap(
-              children: [
-                CustomChoiceChip(
-                    text: 'Green', selected: false, onSelected: (value) {}),
-                CustomChoiceChip(
-                    text: 'Blue', selected: true, onSelected: (value) {}),
-                CustomChoiceChip(
-                    text: 'Yellow', selected: false, onSelected: (value) {})
-              ],
-            ),
-          ],
+          children: product.productAtrributes!
+              .map((attribute) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SectionHeading(
+                          title: attribute.name ?? "", showActionButton: false),
+                      SizedBox(height: SizesLW.spaceBtwItems / 2),
+                      Wrap(
+                          children: attribute.values!
+                              .map((e) => CustomChoiceChip(
+                                  text: e,
+                                  selected: false,
+                                  onSelected: (value) {}))
+                              .toList()),
+                    ],
+                  ))
+              .toList(),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SectionHeading(title: "Size"),
-            SizedBox(height: SizesLW.spaceBtwItems / 2),
-            Wrap(
-              spacing: 10,
-              children: [
-                CustomChoiceChip(
-                    text: 'EU 34', selected: true, onSelected: (value) {}),
-                CustomChoiceChip(
-                    text: 'EU 36', selected: false, onSelected: (value) {}),
-                CustomChoiceChip(
-                    text: 'EU 38', selected: false, onSelected: (value) {})
-              ],
-            ),
-          ],
-        )
       ],
     );
   }
