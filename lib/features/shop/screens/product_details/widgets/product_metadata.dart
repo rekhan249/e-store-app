@@ -41,7 +41,7 @@ class ProductMetadata extends StatelessWidget {
             SizedBox(width: SizesLW.spaceBtwItems),
             if (product.productType == ProductType.single.toString() &&
                 product.salePrice > 0)
-              Text("\$${product.price}%",
+              Text("\$${product.price}",
                   style: Theme.of(context)
                       .textTheme
                       .titleSmall!
