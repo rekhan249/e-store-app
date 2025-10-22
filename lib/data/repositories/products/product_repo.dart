@@ -36,6 +36,49 @@ class ProductRepo extends GetxController {
     }
   }
 
+  /// Get all featured Products
+  Future<List<ProductModel>> getAllFeatureProducts() async {
+    try {
+      final snapShot = await _db
+          .collection("products")
+          .where("isFeatured", isEqualTo: true)
+          .get();
+
+      return snapShot.docs.map((e) => ProductModel.fromMap(e)).toList();
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthException(code: e.code).message!;
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, plugin: 'firebase_auth').message!;
+    } on FormatException catch (_) {
+      throw FormatException();
+    } on PlatformException catch (e) {
+      throw PlatformException(code: e.code).message!;
+    } catch (e) {
+      throw "Something went wrong, Please try again";
+    }
+  }
+
+  /// getAllProducts by Query
+  Future<List<ProductModel>> fetchProductByQuery(Query query) async {
+    try {
+      final querySnapshot = await query.get();
+      final List<ProductModel> productList = querySnapshot.docs
+          .map((e) => ProductModel.fromQuerySnapShot(e))
+          .toList();
+      return productList;
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthException(code: e.code).message!;
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, plugin: 'firebase_auth').message!;
+    } on FormatException catch (_) {
+      throw FormatException();
+    } on PlatformException catch (e) {
+      throw PlatformException(code: e.code).message!;
+    } catch (e) {
+      throw "Something went wrong, Please try again";
+    }
+  }
+
   /// Upload dummy data to the cloud Firebase
   Future<void> uploadDummmyProductsData(List<ProductModel> products) async {
     try {

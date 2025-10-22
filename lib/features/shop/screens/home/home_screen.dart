@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_store_app/common/styles/shimmer_effect.dart';
 import 'package:e_store_app/common/widgets/custom_shapes/containers/custom_search.dart';
 import 'package:e_store_app/common/widgets/custom_shapes/curved_edges/clippath_custom_curved.dart';
@@ -68,8 +69,18 @@ class HomeScreen extends StatelessWidget {
 
                   /// Heading
                   SectionHeading(
-                      title: "Popular Products",
-                      onPressed: () => Get.to(() => AllProducts())),
+                    title: "Popular Products",
+                    onPressed: () => Get.to(
+                      () => AllProducts(
+                        title: 'Popular Products',
+                        query: FirebaseFirestore.instance
+                            .collection("products")
+                            .where("isFeatured", isEqualTo: true)
+                            .limit(6),
+                        futureMethod: controller.fetchAllFeaturedProducts(),
+                      ),
+                    ),
+                  ),
                   SizedBox(height: SizesLW.spaceBtwItems),
 
                   /// --- Popular Products

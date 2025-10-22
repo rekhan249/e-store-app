@@ -97,4 +97,35 @@ class ProductModel {
             )
             .toList());
   }
+
+  /// from Firebase to Model
+  factory ProductModel.fromQuerySnapShot(
+      QueryDocumentSnapshot<Object?> document) {
+    final map = document.data() as Map<String, dynamic>;
+    return ProductModel(
+        id: document.id,
+        stock: map['stock'],
+        sku: map['sku'],
+        price: double.parse((map['price'] ?? 0.0).toString()),
+        title: map['title'],
+        date: map['date'] != null
+            ? DateTime.fromMillisecondsSinceEpoch(map['date'] as int)
+            : null,
+        salePrice: double.parse((map['salePrice'] ?? 0.0).toString()),
+        thumbnail: map['thumbnail'] ?? '',
+        isFeatured: map['isFeatured'] ?? false,
+        brand: BrandModel.fromMap(map['brand']),
+        description: map['description'] ?? "",
+        categoryId: map['categoryId'] ?? "",
+        images: map['images'] != null ? List<String>.from((map['images'])) : [],
+        productType: map['productType'] ?? "",
+        productAtrributes: (map["productAtrributes"] as List<dynamic>)
+            .map((e) => ProductAttributeModel.fromMap(e))
+            .toList(),
+        productVariations: (map["productVariations"] as List<dynamic>)
+            .map(
+              (e) => ProductVariationModel.fromMap(e),
+            )
+            .toList());
+  }
 }
