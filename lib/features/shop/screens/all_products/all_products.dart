@@ -31,7 +31,16 @@ class AllProducts extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return loader;
                 }
-                return CustomSortableProducts();
+                if (!snapshot.hasData ||
+                    snapshot.data == null ||
+                    snapshot.data!.isEmpty) {
+                  return Center(child: Text("Data not found"));
+                }
+                if (snapshot.hasError) {
+                  return Center(child: Text("Something went wrong"));
+                }
+                final products = snapshot.data;
+                return CustomSortableProducts(products: products);
               }),
         ),
       ),
