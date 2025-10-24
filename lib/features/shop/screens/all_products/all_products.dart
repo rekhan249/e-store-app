@@ -5,6 +5,7 @@ import 'package:e_store_app/common/widgets/products/sortablepro/sortable_product
 import 'package:e_store_app/features/shop/controllers/all_products_controller.dart';
 import 'package:e_store_app/features/shop/models/product_model.dart';
 import 'package:e_store_app/utils/contants/sizeslw.dart';
+import 'package:e_store_app/utils/helpers/cloud_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,17 +29,9 @@ class AllProducts extends StatelessWidget {
               future: futureMethod ?? controller.fetchProductByQuery(query),
               builder: (context, snapshot) {
                 const loader = ShimmerEffect();
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return loader;
-                }
-                if (!snapshot.hasData ||
-                    snapshot.data == null ||
-                    snapshot.data!.isEmpty) {
-                  return Center(child: Text("Data not found"));
-                }
-                if (snapshot.hasError) {
-                  return Center(child: Text("Something went wrong"));
-                }
+                final widget = CloudHelper.checkingMultipleRecordState(
+                    snapshot: snapshot, loader: loader);
+                if (widget != null) return widget;
                 final products = snapshot.data;
                 return CustomSortableProducts(products: products);
               }),

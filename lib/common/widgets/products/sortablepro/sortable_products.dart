@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:e_store_app/common/widgets/layouts/grid_layout_custom.dart';
 import 'package:e_store_app/common/widgets/products/product_and_brands/product_card_vert.dart';
 import 'package:e_store_app/features/shop/controllers/all_products_controller.dart';
@@ -16,11 +14,12 @@ class CustomSortableProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(AllProductsController());
-    log(controller.toString());
+    controller.assignProducts(products!);
     return Column(
       children: [
         /// Dropdown Menu item
         DropdownButtonFormField(
+            value: controller.selectedSortOption.value,
             decoration: InputDecoration(prefixIcon: Icon(Iconsax.sort)),
             items: [
               'Name',
@@ -30,15 +29,19 @@ class CustomSortableProducts extends StatelessWidget {
               'Newest',
               'Popularity'
             ].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-            onChanged: (value) {}),
+            onChanged: (value) {
+              controller.sortProducts(value!);
+            }),
         SizedBox(height: SizesLW.spacesBtwSections),
 
         /// Products
 
-        GridLayoutCustom(
-            itemCount: 4,
-            itemBuilder: (context, index) =>
-                ProductCardVert(product: products![index]))
+        Obx(
+          () => GridLayoutCustom(
+              itemCount: controller.products.length,
+              itemBuilder: (context, index) =>
+                  ProductCardVert(product: controller.products[index])),
+        )
       ],
     );
   }
