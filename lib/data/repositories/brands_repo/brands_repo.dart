@@ -1,0 +1,29 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_store_app/features/shop/models/brand_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+
+class BrandsRepository extends GetxController {
+  /// variables
+  final _db = FirebaseFirestore.instance;
+
+  /// Get All Brands
+  Future<Iterable<BrandModel>> getAllBrands() async {
+    try {
+      final snapshot = await _db.collection("brands").get();
+      final result = snapshot.docs.map((e) => BrandModel.fromSnapshot(e));
+      return result;
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthException(code: e.code).message!;
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, plugin: 'firebase_auth').message!;
+    } on FormatException catch (_) {
+      throw FormatException();
+    } on PlatformException catch (e) {
+      throw PlatformException(code: e.code).message!;
+    } catch (e) {
+      throw "Something went wrong, Please try again";
+    }
+  }
+}

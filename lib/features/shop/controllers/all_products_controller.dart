@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_store_app/data/repositories/products/product_repo.dart';
+import 'package:e_store_app/data/repositories/products_repos/product_repo.dart';
 import 'package:e_store_app/features/shop/models/product_model.dart';
 import 'package:e_store_app/utils/logging/logger.dart';
 import 'package:get/get.dart';
