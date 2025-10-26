@@ -79,6 +79,37 @@ class ProductRepo extends GetxController {
     }
   }
 
+  /// getAllProducts by Query
+  Future<List<ProductModel>> getProductForBrand(
+      {required String brandId, int limit = -1}) async {
+    try {
+      final querySnapshot = limit == -1
+          ? await _db
+              .collection("products")
+              .where("brandId", isEqualTo: brandId)
+              .get()
+          : await _db
+              .collection("products")
+              .where("brandId", isEqualTo: brandId)
+              .limit(limit)
+              .get();
+      final products = querySnapshot.docs
+          .map((e) => ProductModel.fromQuerySnapShot(e))
+          .toList();
+      return products;
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthException(code: e.code).message!;
+    } on FirebaseException catch (e) {
+      throw FirebaseException(code: e.code, plugin: 'firebase_auth').message!;
+    } on FormatException catch (_) {
+      throw FormatException();
+    } on PlatformException catch (e) {
+      throw PlatformException(code: e.code).message!;
+    } catch (e) {
+      throw "Something went wrong, Please try again";
+    }
+  }
+
   /// Upload dummy data to the cloud Firebase
   Future<void> uploadDummmyProductsData(List<ProductModel> products) async {
     try {

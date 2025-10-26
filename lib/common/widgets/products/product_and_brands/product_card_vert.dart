@@ -50,21 +50,22 @@ class ProductCardVert extends StatelessWidget {
                       isNetworkImage: true),
 
                   /// -- Sale Tag
-                  Positioned(
-                    top: 12,
-                    child: CircularContainer(
-                      radius: SizesLW.sm,
-                      backgroundColor:
-                          EStoreColors.secondary.withValues(alpha: 0.8),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: SizesLW.sm, vertical: SizesLW.xs),
-                      child: Text("$salePercentage%",
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge!
-                              .apply(color: EStoreColors.black)),
+                  if (salePercentage != null)
+                    Positioned(
+                      top: 12,
+                      child: CircularContainer(
+                        radius: SizesLW.sm,
+                        backgroundColor:
+                            EStoreColors.secondary.withValues(alpha: 0.8),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: SizesLW.sm, vertical: SizesLW.xs),
+                        child: Text("$salePercentage%",
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge!
+                                .apply(color: EStoreColors.black)),
+                      ),
                     ),
-                  ),
 
                   /// -- WishList/Heart Icon
                   Positioned(
